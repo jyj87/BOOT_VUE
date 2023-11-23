@@ -10,4 +10,9 @@ public class DataController {
     public String home() {
         return "Data 준비중....";
     }
+
+    @GetMapping("/1")
+    public String home1() {
+        return "Data1 준비중....";
+    }
 }
