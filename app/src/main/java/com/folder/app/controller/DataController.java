@@ -1,16 +1,23 @@
 package com.folder.app.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.folder.app.dto.ResultDTO;
+import com.folder.app.dto.UserDTO;
+import com.folder.app.service.UserService;
+
+@CrossOrigin(origins = "http://localhost:8800")
 @RestController
 public class DataController {
 
-    @CrossOrigin(origins = "http://localhost:8800")
     @GetMapping("/")
     public String home() {
         return "Data 준비중....";
@@ -21,22 +28,28 @@ public class DataController {
         return "api 준비중....";
     }
 
+    // ===============================================================
+    @Autowired
+    private UserService uService;
+
     @PostMapping("/findAll")
-    public void findAll() {
+    public ResultDTO findAll() {
+        return uService.findAll();
 
     }
 
     @PostMapping("/editById")
-    public void editById() {
-
+    public ResultDTO editById(@RequestBody UserDTO uDto) {
+        return uService.editById(uDto);
     }
 
     @DeleteMapping("/delete")
-    public void delete() {
-
+    public ResultDTO delete(@RequestParam("no") int no) {
+        return uService.delete(no);
     }
 
     @PutMapping("save")
-    public void save() {
+    public ResultDTO save(@RequestBody UserDTO uDto) {
+        return uService.save(uDto);
     }
 }
