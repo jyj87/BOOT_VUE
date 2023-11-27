@@ -67,6 +67,7 @@ public class UserServiceImp implements UserService {
         int state = uDao.save(uDto);
         if (state == 1) {
             rDto.setState(true);
+            rDto.setResult(uDto);
             rDto.setMessage("사용자 생성이 성공 하였습니다.");
 
         } else {
